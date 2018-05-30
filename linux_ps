@@ -1,0 +1,88 @@
+PS查看进程
+
+ 
+
+简单选项：
+-A 显示所有进程
+-N 显示所有进程，除了执行ps指令终端机下的程序之外
+-a 显示现行终端机下的所有进程，包括其他用户的进程
+-d 显示所有进程，不包括其他用户的程序
+-e 显示所有进程，同”-A”选项
+T 显示在当前终端上的所有进程
+a 显示当前终端机下的所有进程，包括其他用户的进程
+g 过期选项 — 不要使用
+r 只显示正在运行的进程
+x 显示没有控制终端的进程
+
+显示选项：
+-C 指定进程的名称，并列出该进程的信息
+-G 列出属于该用户组的进程信息，也可使用户组名来指定
+-U 列出属于该用户的进程，也可使用用户名来指定
+-g 显示当前终端下的所有进程，包括用户组组的进程
+-p 显示指定进程ID的进程信息
+-s 显示指定的会话进程的信息
+-t 显示指定终端的进程信息
+-u 列出指定用户ID的进程，也可使用用户名来指定
+U 列出属于该用户的进程的信息
+t 效果和指定”-t”选项相同，只在列表格式方面稍有差异
+
+输出格式：
+-o,o 指定ps显示的数据项
+-f 完整格式显示
+-j,j 采用工作控制的格式显示进程状况
+s 采用进程信号的格式显示进程状况
+-O,O preloaded -o
+v 采用虚拟内存的格式显示进程状况
+-l,l 采用详细的格式来显示进程状况
+u 显示指定用户运行的所有进程
+-F 使用非常完整的格式显示进程信息
+X 采用旧式的Linux i386登陆格式显示进程状况
+
+长选项：
+–Group 此选项的效果和指定”-G”选项相同
+–User 此选项的效果和指定”-U”选项相同
+–pid 此选项的效果和指定”-p”选项相同
+–cols 设置每列的最大字符数
+–ppid 显示指定父进程下子进程的信息
+–group 此选项的效果和指定”-G”选项相同
+–user 此选项的效果和指定”-U”选项相同
+–sid 此选项的效果和指定”-s”选项相同
+–rows 设置显示画面的列数
+–info 显示排错信息
+–cumulative 列出程序时，包括已中断的子进程信息，此选项的效果和指定”S”选项相同
+–deselect 此选项的效果和指定”-N”选项相同
+–sort 根据指定项排序
+–tty 此选项的效果和指定”-t”选项相同
+–forest 用ASCII字符显示树状结构，表达程序间的相互关系，此选项的效果和”f”选项相同
+–no-heading 不显示标题列，此选项的效果和指定”h”选项相同，只在列表格式方面稍有差异
+
+三.示例：
+
+ps	列出当前shell里当前用户的进程
+ps -u huanxiangwu	列出huanxiangwu运行的所有进程（简明输出）
+ps -u huanxiangwu	u	列出huanxiangwu运行的所有进程（含CPU/MEM信息）
+ps -fu huanxiangwu	显示huanxiangwu运行的所有进程（含PPID信息）
+ps -Fu huanxiangwu	显示huanxiangwu运行的所有进程（含SZ/PSR信息）
+
+ps -e	显示运行的所有进程
+ps -el 以详细列表方式显示运行的所有进程
+ps -ef	以完整格式列表显示运行的所有进程
+ps -eF	以非常完整的格式显示运行的所有进程
+
+ps ax	以简短的BSD风格显示运行的所有进程
+ps aux 以详细的BSD风格显示运行的所有进程
+ps auwx 以详细的宽格式BSD风格显示运行的所有进程
+ps auwwx 以详细的宽度不限的BSD风格显示运行的所有进程
+
+ps -ejH	按进程/会话ID显示进程层级关系
+ps axjf	以BSD风格输出显示进程层级关系
+ps -ef –forest	以forest格式显示进程层级关系
+
+ps -eo ppid,user,%mem,size,vsize,comm --sort=size	按内存使用排序
+ps -eo ppid,user,bsdstart,bsdtime,%cpu,args --sort=%cpu	按CPU使用排序
+ps -eo ppid,user,nice,cputime,args --sort=nice	按低优先级排序
+ps -eo ppid,user,stat,tname,sess,cputime,args --sort=user	按用户排序
+
+ps -C mysqld	现在正在运行的mysqld进程
+ps -p 1234 显示PID为1234的进程信息
+ps -U huanxiangwu,mysql 查看两个用户的进程信息
